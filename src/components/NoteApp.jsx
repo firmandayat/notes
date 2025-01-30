@@ -7,9 +7,11 @@ import NotFoundPage from '../pages/NotFound';
 import RegisterPage from '../pages/RegisterPage';
 import LoginPage from '../pages/LoginPage';
 import { getUserLogged, putAccessToken } from '../utils/network-data';
-import {
-  FaSignOutAlt,
-} from 'react-icons/fa';
+import { FaSignOutAlt } from 'react-icons/fa';
+import { ThemeProvider } from '../contexts/ThemeContext';
+import ToggleTheme from '../components/ToggleTheme';
+import { LocaleProvider } from '../contexts/LocaleContext';
+
 
 class NoteApp extends React.Component {
   constructor(props) {
@@ -18,37 +20,63 @@ class NoteApp extends React.Component {
     this.state = {
       authedUser: null,
       initializing: false,
+      theme: 'light',
+      toggleTheme: () => {
+        this.setState((prevState) => {
+          const newTheme = prevState.theme === 'light' ? 'dark' : 'light';
+          localStorage.setItem('theme', newTheme);
+          return {
+            theme: newTheme,
+          };
+        });
+      },
+      localeContext: {
+        locale: 'id',
+        toggleLocale: () => {
+          this.setState((prevState) => {
+            return {
+              localeContext: {
+                ...prevState.localeContext,
+                locale: prevState.localeContext.locale === 'id' ? 'en' : 'id',
+              },
+            };
+          });
+        },
+      },
     };
+
     this.onLoginSuccess = this.onLoginSuccess.bind(this);
     this.onLogout = this.onLogout.bind(this);
+    this.toggleTheme = this.toggleTheme.bind(this);
   }
 
   async componentDidMount() {
+    document.documentElement.setAttribute('data-theme', this.state.theme);
     const { data } = await getUserLogged();
-    this.setState(() => {
-      return {
-        authedUser: data,
-      };
-    });
+    this.setState({ authedUser: data });
   }
 
   async onLoginSuccess({ accessToken }) {
     putAccessToken(accessToken);
     const { data } = await getUserLogged();
-    this.setState(() => {
-      return {
-        authedUser: data,
-      };
-    });
+    this.setState({ authedUser: data });
   }
 
   onLogout() {
-    this.setState(() => {
-      return {
-        authedUser: null,
-      };
-    });
+    this.setState({ authedUser: null });
     putAccessToken('');
+  }
+
+  toggleTheme() {
+    this.setState((prevState) => ({
+      theme: prevState.theme === 'light' ? 'dark' : 'light',
+    }));
+  }
+
+  componentDidUpdate(prevProps, prevState) {
+    if (prevState.theme !== this.state.theme) {
+      document.documentElement.setAttribute('data-theme', this.state.theme);
+    }
   }
 
   render() {
@@ -58,46 +86,53 @@ class NoteApp extends React.Component {
 
     if (this.state.authedUser === null) {
       return (
-        <div className="contact-app">
-          <header className="contact-app__header">
-            <center>
-              <h1 className="app">Aplikasi Catatan</h1>
-            </center>
-          </header>
-          <main>
-            <Routes>
-              <Route
-                path="/*"
-                element={<LoginPage loginSuccess={this.onLoginSuccess} />}
-              />
-              <Route path="/register" element={<RegisterPage />} />
-            </Routes>
-          </main>
-        </div>
+        <LocaleProvider value={this.state.localeContext}>
+          <div className="contact-app">
+            <header className="contact-app__header">
+              <center>
+                <h1 className="app">Aplikasi Catatan</h1>
+              </center>
+            </header>
+            <main>
+              <Routes>
+                <Route
+                  path="/*"
+                  element={<LoginPage loginSuccess={this.onLoginSuccess} />}
+                />
+                <Route path="/register" element={<RegisterPage />} />
+              </Routes>
+            </main>
+          </div>
+        </LocaleProvider>
       );
     }
 
     const isAddNotePage = window.location.pathname === '/notes/new';
 
     return (
-      <div className="note-app">
-        <div>
-          {!isAddNotePage && (
-            <button className="out" onClick={this.onLogout}>
-              <FaSignOutAlt />
-              <span> {this.state.authedUser.name}</span>
-            </button>
-          )}
-        </div>
-        <main>
-          <Routes>
-            <Route path="/" element={<HomePage />} />
-            <Route path="/notes/new" element={<AddNote />} />
-            <Route path="/notes/:id" element={<DetailNote />} />
-            <Route path="*" element={<NotFoundPage />} />
-          </Routes>
-        </main>
-      </div>
+      <LocaleProvider value={this.state.localeContext}>
+        <ThemeProvider
+          value={{ theme: this.state.theme, toggleTheme: this.toggleTheme }}
+        >
+          <div className="note-app">
+            {!isAddNotePage && (
+              <button className="out" onClick={this.onLogout}>
+                <FaSignOutAlt />
+                <span> {this.state.authedUser.name}</span>
+              </button>
+            )}
+            <main>
+              <Routes>
+                <Route path="/" element={<HomePage />} />
+                <Route path="/notes/new" element={<AddNote />} />
+                <Route path="/notes/:id" element={<DetailNote />} />
+                <Route path="*" element={<NotFoundPage />} />
+              </Routes>
+            </main>
+            <ToggleTheme />
+          </div>
+        </ThemeProvider>
+      </LocaleProvider>
     );
   }
 }

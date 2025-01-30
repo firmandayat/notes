@@ -5,14 +5,13 @@ import { FaRegFileAlt } from 'react-icons/fa';
 import { useNavigate } from 'react-router-dom';
 import { Link } from 'react-router-dom';
 import Footer from '../components/Footer';
-import PropTypes from 'prop-types';
 
 function AddPage() {
   const navigate = useNavigate();
 
-  async function onAddNoteHandler(title, body) {
+  async function onAddNoteHandler(note) {
     try {
-      const { data } = await addNote({ title, body });
+      const { data } = await addNote(note);
       console.log('Note added successfully:', data);
       navigate('/');
     } catch (error) {
@@ -24,7 +23,7 @@ function AddPage() {
     <div className="add-note">
       <div className="note-app">
         <h1 className="note-app__header">
-          <FaRegFileAlt />
+          <FaRegFileAlt className="home" />
           <Link className="home" to="/">
             My Notes
           </Link>
@@ -36,10 +35,5 @@ function AddPage() {
     </div>
   );
 }
-
-AddPage.propTypes = {
-  title: PropTypes.string,
-  body: PropTypes.string,
-};
 
 export default AddPage;

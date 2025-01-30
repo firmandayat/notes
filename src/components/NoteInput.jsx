@@ -19,24 +19,28 @@ class NoteInput extends React.Component {
   }
 
   onTitleChangeEventHandler(event) {
-    this.setState(() => {
-      return {
-        title: event.target.value,
-      };
-    });
+    this.setState({ title: event.target.value });
   }
 
   onBodyChangeEventHandler(event) {
-    this.setState(() => {
-      return {
-        body: event.target.value,
-      };
-    });
+    this.setState({ body: event.target.value });
   }
 
-  onSubmitChangeEventHandler(event) {
+  async onSubmitChangeEventHandler(event) {
     event.preventDefault();
-    this.props.addNote(this.state);
+    const { title, body } = this.state;
+
+    if (!title.trim() || !body.trim()) {
+      console.error('Title and body cannot be empty');
+      return;
+    }
+
+    try {
+      await this.props.addNote({ title, body });
+      this.setState({ title: '', body: '' });
+    } catch (error) {
+      console.error('Failed to add note:', error);
+    }
   }
 
   render() {
@@ -70,9 +74,7 @@ class NoteInput extends React.Component {
 }
 
 NoteInput.propTypes = {
-  addNote: PropTypes.func,
-  title: PropTypes.string,
-  body: PropTypes.string
+  addNote: PropTypes.func.isRequired,
 };
 
 export default NoteInput;

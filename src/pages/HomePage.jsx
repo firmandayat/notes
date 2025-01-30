@@ -93,7 +93,6 @@ class NoteApp extends React.Component {
 
   render() {
     const { notes, searchNote } = this.state;
-    // const { logout, name } = this.props;
 
     const filteredNotes = (notes || []).filter((note) =>
       note.title.toLowerCase().includes(searchNote.toLowerCase())
@@ -104,7 +103,7 @@ class NoteApp extends React.Component {
     return (
       <div className="note-app">
         <h1 className="note-app__header">
-          <FaRegFileAlt />
+          <FaRegFileAlt className="home" />
           <Link className="home" to="/">
             My Notes
           </Link>

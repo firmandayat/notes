@@ -1,3 +1,25 @@
+:root {
+  --font-color: #333;
+  --background-color: #eee;
+}
+
+[data-theme='dark'] {
+  --font-color: #eee;
+  --background-color: #333;
+}
+
+.toggle-theme-button {
+  position: fixed;
+  top: 13px;
+  right: 165px;
+  z-index: 3; 
+  background: transparent;
+  border: none;
+  font-size: 24px;
+  cursor: pointer;
+  color: white;
+}
+
 * {
   padding: 0;
   margin: 0;
@@ -8,6 +30,8 @@ body {
   font-family: "Inter", sans-serif;
   color: rgb(54, 53, 53);
   height: 100%;
+  background-color: var(--background-color);
+  color: var(--font-color);
 }
 
 input:focus {
@@ -63,6 +87,14 @@ textarea::placeholder {
   color: white;
 }
 
+.regis:hover{
+  opacity: 80%;
+}
+
+.login:hover{
+  opacity: 80%;
+}
+
 .app{
   text-align: center;
   color: #9dc183;
@@ -93,7 +125,7 @@ textarea::placeholder {
 
 .add {
   position: absolute;
-  right: 110px;
+  right: 20px;
   top: 80px;
   z-index: 1;
   background-color: #9dc183;
@@ -107,9 +139,9 @@ textarea::placeholder {
 }
 
 .out {
-  position: absolute;
+  position: fixed;
   right: 20px;
-  top: 80px;
+  bottom: 100px;
   z-index: 1;
   background-color: #c25454;
   color: #ffffff;
@@ -373,6 +405,7 @@ textarea::placeholder {
 
 .note-item__delete-button {
   color: #ff5f52;
+  background-color: rgb(226, 226, 226);
 }
 
 .note-item__button {
@@ -397,6 +430,16 @@ textarea::placeholder {
 @media only screen and (min-width: 500px) {
   .notes-list {
     grid-template-columns: 1fr 1fr;
+  }
+  .toggle-theme-button {
+  top: 13px;
+  right: 165px;
+}
+}
+
+@media only screen and (min-width: 300px) {
+  .home{
+    font-size: 20px;
   }
 }
 
