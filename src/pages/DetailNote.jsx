@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { getNote } from '../utils/network-data';
-import { FaRegFileAlt } from 'react-icons/fa';
+import { FaRegFileAlt, FaSpinner } from 'react-icons/fa';
 import { Link } from 'react-router-dom';
 import Footer from '../components/Footer';
 import NotFoundPage from './NotFound';
@@ -28,7 +28,9 @@ function NoteDetail() {
   }, [id]);
 
   if (loading) {
-    return <p>Loading note...</p>;
+    return <center>
+      <h2 className='loading'><FaSpinner/> <span> Loading note...</span></h2>
+    </center>;
   }
 
   if (error) {

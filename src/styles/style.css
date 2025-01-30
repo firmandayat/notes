@@ -101,6 +101,14 @@ textarea::placeholder {
   padding-top: 50px;
 }
 
+.loading{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: #86918b;
+  height: 100vh;
+}
+
 .footer {
   background-color: #9dc183;
   display: flex;
