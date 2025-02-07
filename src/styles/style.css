@@ -42,8 +42,9 @@
   .note-item {
     box-shadow: none;
     z-index: 3;
-    background-color: #0f1113;
+    background-color: #1b1f22;
   }
+  
 }
 
 .toggle-theme-button {
@@ -203,20 +204,6 @@ textarea::placeholder {
   height: 30px;
 }
 
-.bahasa {
-  right: 100px;
-  top: 0px;
-  z-index: 1;
-  background-color: #9dc183;
-  color: #ffffff;
-  width: 80px;
-  border-radius: 10px;
-  padding: 6px;
-  text-decoration: none;
-  font-weight: bold;
-  height: 30px;
-}
-
 .out {
   position: fixed;
   right: 20px;
@@ -316,10 +303,6 @@ textarea::placeholder {
   margin: 8px 0;
   flex: 1;
   color: white;
-}
-
-.note-app__search input {
-  color: red;
 }
 
 .note-app__body {
