@@ -21,7 +21,7 @@ function RegisterPage() {
         <LocaleConsumer>
           {({ locale }) => (
             <p>
-              {locale === 'en' ? 'Back to' : 'kembali ke'}
+              {locale === 'en' ? 'Back to' : 'Kembali ke'}
               <Link className='link' to="/">{locale === 'en' ? ' Login' : ' Masuk'}</Link>
             </p>
           )}
