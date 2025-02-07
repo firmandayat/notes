@@ -62,7 +62,7 @@ class NoteInput extends React.Component {
                 onChange={this.onTitleChangeEventHandler}
                 maxLength={this.state.titleMaxLength}
               />
-              <input
+              <textarea
                 className="reveal"
                 type="text"
                 placeholder={locale === 'en' ? 'Content' : 'Catatan'}

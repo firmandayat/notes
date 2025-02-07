@@ -49,7 +49,7 @@
     background-color: #1b1f22;
   }
 
-.note-app__search-wrapper svg {
+  .note-app__search-wrapper svg {
     color: white;
   }
 }
@@ -179,10 +179,10 @@ textarea::placeholder {
   display: flex;
   justify-content: center;
   align-items: center;
-  padding: 15px 0;
+  padding: 5px 0;
   width: 100%;
   color: white;
-  height: 80px;
+  height: 60px;
   font-size: smaller;
   position: fixed;
   bottom: 0;
@@ -253,6 +253,7 @@ textarea::placeholder {
 
 .add-note {
   height: 100vh;
+  overflow-y: auto;
 }
 
 .wrap {
@@ -515,7 +516,7 @@ textarea::placeholder {
   }
 }
 
-@media only screen and (min-width: 300px) and (max-width:500px) {
+@media only screen and (min-width: 300px) and (max-width: 500px) {
   .home {
     font-size: 20px;
   }
@@ -524,7 +525,7 @@ textarea::placeholder {
     margin-top: 80px;
   }
 
-  .note-app__title{
+  .note-app__title {
     margin-bottom: 100px;
   }
 }
