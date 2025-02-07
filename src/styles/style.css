@@ -533,16 +533,15 @@ textarea::placeholder {
 
 @media only screen and (min-width: 800px) {
   .notes-list {
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns: repeat(4, 1fr);
   }
 
   .note-search input {
     min-width: 400px;
   }
-}
 
-@media only screen and (min-width: 800px) {
-  .notes-list {
-    grid-template-columns: repeat(4, 1fr);
+  .app{
+    margin-top: 20px;
   }
+
 }
