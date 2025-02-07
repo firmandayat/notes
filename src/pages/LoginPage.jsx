@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom';
 import LoginInput from '../components/LoginInput';
 import { login } from '../utils/network-data';
 import { LocaleConsumer } from '../contexts/LocaleContext';
+import Footer from '../components/Footer';
 
 function LoginPage({ loginSuccess }) {
   async function onLogin({ email, password }) {
@@ -29,6 +30,7 @@ function LoginPage({ loginSuccess }) {
           )}
         </LocaleConsumer>
       </center>
+      <Footer/>
     </section>
   );
 }

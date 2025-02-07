@@ -522,7 +522,8 @@ textarea::placeholder {
   }
 
   .app {
-    margin-top: 80px;
+    margin-top: 50px;
+    padding-bottom: 30px;
   }
 
   .note-app__title {
