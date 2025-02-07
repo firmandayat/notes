@@ -5,6 +5,7 @@ import { FaRegFileAlt, FaSpinner } from 'react-icons/fa';
 import { Link } from 'react-router-dom';
 import Footer from '../components/Footer';
 import NotFoundPage from './NotFound';
+import { LocaleConsumer } from '../contexts/LocaleContext';
 
 function NoteDetail() {
   const { id } = useParams(); // Mengambil parameter id dari URL
@@ -28,9 +29,13 @@ function NoteDetail() {
   }, [id]);
 
   if (loading) {
-    return <center>
-      <h2 className='loading'><FaSpinner/> <span> Loading note...</span></h2>
-    </center>;
+    return (
+      <center>
+        <h2 className="loading">
+          <FaSpinner /> <span> Loading note...</span>
+        </h2>
+      </center>
+    );
   }
 
   if (error) {
@@ -46,25 +51,31 @@ function NoteDetail() {
   }
 
   return (
-    <>
-      <div className="add-note">
-        <h1 className="note-app__header">
-          <FaRegFileAlt className="home" />
-          <Link className="home" to="/">
-            My Notes
-          </Link>
-        </h1>
-        <div className="wrap-detail">
-          <h3 className="note-item__titlebar">Detail Note</h3>
-          <h3 className="note-item__title-detail">{note.title}</h3>
-          <p className="note-item__date">
-            {new Date(note.createdAt).toLocaleDateString()}
-          </p>
-          <p className="note-item__body">{note.body}</p>
-        </div>
-      </div>
-      <Footer />
-    </>
+    <LocaleConsumer>
+      {({ locale }) => (
+        <>
+          <div className="add-note">
+            <h1 className="note-app__header">
+              <FaRegFileAlt className="home" />
+              <Link className="home" to="/">
+                {locale === 'en' ? 'My Notes' : 'Catatan Saya'}
+              </Link>
+            </h1>
+            <div className="wrap-detail">
+              <h3 className="note-item__titlebar">
+                {locale === 'en' ? 'Detail Note' : 'Rincian Catatan'}
+              </h3>
+              <h3 className="note-item__title-detail">{note.title}</h3>
+              <p className="note-item__date">
+                {new Date(note.createdAt).toLocaleDateString()}
+              </p>
+              <p className="note-item__body">{note.body}</p>
+            </div>
+          </div>
+          <Footer />
+        </>
+      )}
+    </LocaleConsumer>
   );
 }
 
