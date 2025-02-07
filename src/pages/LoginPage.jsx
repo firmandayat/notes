@@ -21,9 +21,9 @@ function LoginPage({ loginSuccess }) {
         <LocaleConsumer>
           {({ locale }) => (
             <p>
-              {locale === 'en' ? 'Do not have an account?' : 'Belum punya akun'}{' '}
-              <Link to="/register">
-                {locale === 'en' ? 'Register' : 'Daftar'}
+              {locale === 'en' ? 'Do not have an account?' : 'Belum punya akun?'}
+              <Link className='link' to="/register">
+                {locale === 'en' ? ' Register' : ' Daftar'}
               </Link>
             </p>
           )}
