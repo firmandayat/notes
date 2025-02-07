@@ -108,8 +108,7 @@ class NoteApp extends React.Component {
           <Link className="home" to="/">
             <LocaleConsumer>
               {({ locale }) => {
-                return locale === 'id' ? 'My Notes' : 'Catatan Saya'
-                ;
+                return locale === 'id' ? 'My Notes' : 'Catatan Saya';
               }}
             </LocaleConsumer>
           </Link>
@@ -129,12 +128,22 @@ class NoteApp extends React.Component {
         <button>
           <Link className="add" to="/notes/new">
             <FaPlusCircle />
-            <span> Note</span>
+            <LocaleConsumer>{({ locale }) => (
+              <span> {locale === 'id' ? 'Note' : 'Catatan'}</span>
+            )}
+            </LocaleConsumer>
           </Link>
         </button>
 
         <section className="wrap">
-          <h3 className="note-app__title-item reveal">Active Notes</h3>
+          <LocaleConsumer>
+            {({ locale }) => (
+              <h3 className="note-app__title-item reveal">
+                {locale === 'id' ? 'Actived Notes' : 'Catatan Aktif'}
+              </h3>
+            )}
+          </LocaleConsumer>
+
           <NoteList
             notes={activeNotes}
             onDelete={this.onDeleteHandler}
@@ -143,9 +152,12 @@ class NoteApp extends React.Component {
 
           <br />
           <br />
-          <h3 className="note-app__title-item-archived reveal">
-            Archived Notes
-          </h3>
+          <LocaleConsumer>{({ locale }) => (
+            <h3 className="note-app__title-item-archived reveal">
+              {locale === 'id' ? 'Archived Notes' : 'Arsip Catatan'}
+            </h3>
+          )}
+          </LocaleConsumer>
           <NoteList
             notes={archivedNotes}
             onDelete={this.onDeleteHandler}

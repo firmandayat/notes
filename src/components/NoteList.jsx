@@ -1,6 +1,7 @@
 import React from 'react';
 import NoteItem from './NoteItem';
 import PropTypes from 'prop-types';
+import { LocaleConsumer } from '../contexts/LocaleContext';
 
 function NoteList({ notes, onDelete, onArchived }) {
   return (
@@ -16,7 +17,10 @@ function NoteList({ notes, onDelete, onArchived }) {
           />
         ))
       ) : (
-        <h3 className="notes-list__empty-message reveal">Empty notes</h3>
+        <LocaleConsumer>{({ locale })=>(
+          <h3 className="notes-list__empty-message reveal">{locale === 'id' ? 'Empty notes' : 'Tidak ada catatan'}</h3>
+        )}
+        </LocaleConsumer>
       )}
     </div>
   );

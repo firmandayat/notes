@@ -1,7 +1,7 @@
 import React from 'react';
 import { LocaleConsumer } from '../contexts/LocaleContext';
 
-function ToggleLocale() {
+function Togglanguage() {
   return (
     <LocaleConsumer>
       {({ locale, toggleLocale }) => {
@@ -15,4 +15,4 @@ function ToggleLocale() {
   );
 }
 
-export default ToggleLocale;
+export default Togglanguage;

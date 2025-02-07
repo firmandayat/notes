@@ -1,6 +1,7 @@
 import PropTypes from 'prop-types';
 import React from 'react';
 import { FaArchive } from 'react-icons/fa';
+import { LocaleConsumer } from '../contexts/LocaleContext';
 
 function ArchivedButton({ id, onArchived, isArchived }) {
   return (
@@ -9,7 +10,19 @@ function ArchivedButton({ id, onArchived, isArchived }) {
       onClick={() => onArchived(id)}
     >
       <FaArchive />
-      <span> {isArchived ? 'Unarchive' : 'Archive'}</span>
+      <LocaleConsumer>
+        {({ locale }) => (
+          <span>
+            {isArchived
+              ? locale === 'id'
+                ? ' Unarchive'
+                : ' Buka Arsip'
+              : locale === 'id'
+                ? ' Archive '
+                : ' Arsip'}
+          </span>
+        )}
+      </LocaleConsumer>
     </button>
   );
 }
