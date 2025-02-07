@@ -12,6 +12,7 @@ import { ThemeProvider } from '../contexts/ThemeContext';
 import ToggleTheme from '../components/ToggleTheme';
 import { LocaleProvider } from '../contexts/LocaleContext';
 import ToggleLanguage from '../components/ToggleLanguage';
+import { LocaleConsumer } from '../contexts/LocaleContext';
 
 class NoteApp extends React.Component {
   constructor(props) {
@@ -87,22 +88,36 @@ class NoteApp extends React.Component {
     if (this.state.authedUser === null) {
       return (
         <LocaleProvider value={this.state.localeContext}>
-          <div className="contact-app">
-            <header className="contact-app__header">
-              <center>
-                <h1 className="app">Aplikasi Catatan</h1>
-              </center>
-            </header>
-            <main>
-              <Routes>
-                <Route
-                  path="/*"
-                  element={<LoginPage loginSuccess={this.onLoginSuccess} />}
-                />
-                <Route path="/register" element={<RegisterPage />} />
-              </Routes>
-            </main>
-          </div>
+          <ThemeProvider
+            value={{ theme: this.state.theme, toggleTheme: this.toggleTheme }}
+          >
+            <div className="contact-app">
+              <header className="contact-app__header">
+                <center>
+                  <LocaleConsumer>
+                    {({ locale }) => (
+                      <h1 className="app">
+                        {locale === 'en' ? 'Notes App' : 'Aplikasi Catatan'}
+                      </h1>
+                    )}
+                  </LocaleConsumer>
+                </center>
+              </header>
+              <main>
+                <Routes>
+                  <Route
+                    path="/*"
+                    element={<LoginPage loginSuccess={this.onLoginSuccess} />}
+                  />
+                  <Route path="/register" element={<RegisterPage />} />
+                </Routes>
+              </main>
+            </div>
+            <div className="note-header">
+              <ToggleTheme />
+              <ToggleLanguage />
+            </div>
+          </ThemeProvider>
         </LocaleProvider>
       );
     }

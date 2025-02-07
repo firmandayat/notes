@@ -110,7 +110,7 @@ textarea::placeholder {
 .app{
   text-align: center;
   color: #9dc183;
-  padding-top: 50px;
+  padding-top: 100px;
 }
 
 .loading{
@@ -246,6 +246,18 @@ textarea::placeholder {
 }
 
 .note-app__header {
+  z-index: 2;
+  position: fixed;
+  width: 100%;
+  padding: 4px 16px;
+  border-bottom: 1px solid #aaa;
+  color: white;
+  background-color: #9dc183;
+}
+
+.note-header {
+  top: 0;
+  height: 50px;
   z-index: 2;
   position: fixed;
   width: 100%;

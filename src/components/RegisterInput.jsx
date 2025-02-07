@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import useInput from '../hooks/useInput';
+import { LocaleConsumer } from '../contexts/LocaleContext';
 
 function RegisterInput({ register }) {
   const [name, onNameChange] = useInput('');
@@ -18,28 +19,34 @@ function RegisterInput({ register }) {
   };
 
   return (
-    <form onSubmit={onSubmitHandler} className="register-input">
-      <input
-        type="text"
-        placeholder="Nama"
-        value={name}
-        onChange={onNameChange}
-      />
-      <input
-        type="email"
-        placeholder="Email"
-        value={email}
-        onChange={onEmailChange}
-      />
-      <input
-        type="password"
-        placeholder="Password"
-        autoComplete="current-password"
-        value={password}
-        onChange={onPasswordChange}
-      />
-      <button className="regis">Register</button>
-    </form>
+    <LocaleConsumer>
+      {({ locale }) => (
+        <form onSubmit={onSubmitHandler} className="register-input">
+          <input
+            type="text"
+            placeholder={locale === 'en' ? 'Name' : 'Nama'}
+            value={name}
+            onChange={onNameChange}
+          />
+          <input
+            type="email"
+            placeholder={locale === 'en' ? 'Email' : 'Surel'}
+            value={email}
+            onChange={onEmailChange}
+          />
+          <input
+            type="password"
+            placeholder={locale === 'en' ? 'Password' : 'Sandi'}
+            autoComplete="current-password"
+            value={password}
+            onChange={onPasswordChange}
+          />
+          <button className="regis">
+            {locale === 'en' ? 'Register' : 'Daftar'}
+          </button>
+        </form>
+      )}
+    </LocaleConsumer>
   );
 }
 
