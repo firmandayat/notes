@@ -9,6 +9,7 @@ import {
 import Footer from '../components/Footer';
 import { Link, useSearchParams } from 'react-router-dom';
 import PropTypes from 'prop-types';
+import { LocaleConsumer } from '../contexts/LocaleContext';
 
 function SearchPageWrapper({ logout, name }) {
   const [searchParams, setSearchParams] = useSearchParams();
@@ -105,7 +106,12 @@ class NoteApp extends React.Component {
         <h1 className="note-app__header">
           <FaRegFileAlt className="home" />
           <Link className="home" to="/">
-            My Notes
+            <LocaleConsumer>
+              {({ locale }) => {
+                return locale === 'id' ? 'My Notes' : 'Catatan Saya'
+                ;
+              }}
+            </LocaleConsumer>
           </Link>
         </h1>
 

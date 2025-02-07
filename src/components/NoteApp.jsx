@@ -11,7 +11,7 @@ import { FaSignOutAlt } from 'react-icons/fa';
 import { ThemeProvider } from '../contexts/ThemeContext';
 import ToggleTheme from '../components/ToggleTheme';
 import { LocaleProvider } from '../contexts/LocaleContext';
-
+import ToggleLocale from './ToggleLocale';
 
 class NoteApp extends React.Component {
   constructor(props) {
@@ -130,6 +130,7 @@ class NoteApp extends React.Component {
               </Routes>
             </main>
             <ToggleTheme />
+            <ToggleLocale />
           </div>
         </ThemeProvider>
       </LocaleProvider>
