@@ -516,7 +516,20 @@ textarea::placeholder {
   .home {
     font-size: 20px;
   }
-}
+
+  .toggle-theme-button {
+    right: 50px;
+  }
+
+  .toggle-languange-button{
+    right: 85px;
+  }
+
+  .app{
+    margin-top: 80px;
+  }
+
+  }
 
 @media only screen and (min-width: 800px) {
   .notes-list {
