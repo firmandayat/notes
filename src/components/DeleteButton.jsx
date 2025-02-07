@@ -7,7 +7,7 @@ function DeleteButton({ id, onDelete }) {
   return (
     <button className="note-item__delete-button" onClick={() => onDelete(id)}>
       <FaTrash />
-      <LocaleConsumer>{({ locale }) => (<span>{locale === 'id' ? ' Delete' : ' Hapus'}</span>)}</LocaleConsumer>
+      <LocaleConsumer>{({ locale }) => (<span>{locale === 'en' ? ' Delete' : ' Hapus'}</span>)}</LocaleConsumer>
     </button>
   );
 }

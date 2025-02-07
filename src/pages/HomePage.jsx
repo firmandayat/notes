@@ -108,7 +108,7 @@ class NoteApp extends React.Component {
           <Link className="home" to="/">
             <LocaleConsumer>
               {({ locale }) => {
-                return locale === 'id' ? 'My Notes' : 'Catatan Saya';
+                return locale === 'en' ? 'My Notes' : 'Catatan Saya';
               }}
             </LocaleConsumer>
           </Link>
@@ -116,20 +116,24 @@ class NoteApp extends React.Component {
 
         <div className="note-app__search-wrapper">
           <FaSearch />
-          <input
-            className="note-app__search"
-            type="text"
-            placeholder="Search notes..."
-            value={searchNote}
-            onChange={this.onSearchHandler}
-          />
+          <LocaleConsumer>
+            {({ locale }) => (
+              <input
+                className="note-app__search"
+                type="text"
+                placeholder={locale === 'en' ? 'Search notes...' : 'Cari Catatan...'}
+                value={searchNote}
+                onChange={this.onSearchHandler}
+              />
+            )}
+          </LocaleConsumer>
         </div>
 
         <button>
           <Link className="add" to="/notes/new">
             <FaPlusCircle />
             <LocaleConsumer>{({ locale }) => (
-              <span> {locale === 'id' ? 'Note' : 'Catatan'}</span>
+              <span> {locale === 'en' ? 'Note' : 'Catatan'}</span>
             )}
             </LocaleConsumer>
           </Link>
@@ -139,7 +143,7 @@ class NoteApp extends React.Component {
           <LocaleConsumer>
             {({ locale }) => (
               <h3 className="note-app__title-item reveal">
-                {locale === 'id' ? 'Actived Notes' : 'Catatan Aktif'}
+                {locale === 'en' ? 'Actived Notes' : 'Catatan Aktif'}
               </h3>
             )}
           </LocaleConsumer>
@@ -154,7 +158,7 @@ class NoteApp extends React.Component {
           <br />
           <LocaleConsumer>{({ locale }) => (
             <h3 className="note-app__title-item-archived reveal">
-              {locale === 'id' ? 'Archived Notes' : 'Arsip Catatan'}
+              {locale === 'en' ? 'Archived Notes' : 'Arsip Catatan'}
             </h3>
           )}
           </LocaleConsumer>

@@ -14,10 +14,10 @@ function ArchivedButton({ id, onArchived, isArchived }) {
         {({ locale }) => (
           <span>
             {isArchived
-              ? locale === 'id'
+              ? locale === 'en'
                 ? ' Unarchive'
                 : ' Buka Arsip'
-              : locale === 'id'
+              : locale === 'en'
                 ? ' Archive '
                 : ' Arsip'}
           </span>

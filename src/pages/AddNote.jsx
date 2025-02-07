@@ -5,6 +5,7 @@ import { FaRegFileAlt } from 'react-icons/fa';
 import { useNavigate } from 'react-router-dom';
 import { Link } from 'react-router-dom';
 import Footer from '../components/Footer';
+import { LocaleConsumer } from '../contexts/LocaleContext';
 
 function AddPage() {
   const navigate = useNavigate();
@@ -25,7 +26,11 @@ function AddPage() {
         <h1 className="note-app__header">
           <FaRegFileAlt className="home" />
           <Link className="home" to="/">
-            My Notes
+            <LocaleConsumer>
+              {({ locale }) => {
+                return locale === 'en' ? 'My Notes' : 'Catatan Saya';
+              }}
+            </LocaleConsumer>
           </Link>
         </h1>
         <h3 className="note-app__title">Add Note</h3>

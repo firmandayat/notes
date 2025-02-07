@@ -7,7 +7,7 @@ function Togglanguage() {
       {({ locale, toggleLocale }) => {
         return (
           <button className="toggle-languange-button" onClick={toggleLocale}>
-            {locale === 'id' ? 'en' : 'id'}
+            {locale === 'en' ? 'en' : 'id'}
           </button>
         );
       }}

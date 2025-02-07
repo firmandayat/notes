@@ -18,7 +18,7 @@ function NoteList({ notes, onDelete, onArchived }) {
         ))
       ) : (
         <LocaleConsumer>{({ locale })=>(
-          <h3 className="notes-list__empty-message reveal">{locale === 'id' ? 'Empty notes' : 'Tidak ada catatan'}</h3>
+          <h3 className="notes-list__empty-message reveal">{locale === 'en' ? 'Empty notes' : 'Tidak ada catatan'}</h3>
         )}
         </LocaleConsumer>
       )}
