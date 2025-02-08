@@ -72,7 +72,7 @@ class NoteInput extends React.Component {
               <button type="submit" className="note-input reveal">
                 <FaPlusCircle />
                 <span>
-                  {locale === 'en' ? ' Add New Note' : ' Tambah Catatan Baru'}
+                  {locale === 'en' ? ' Add Note' : ' Tambah Catatan'}
                 </span>
               </button>
             </>
