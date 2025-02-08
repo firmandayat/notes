@@ -32,13 +32,16 @@ class NoteApp extends React.Component {
         });
       },
       localeContext: {
-        locale: 'en',
+        locale: localStorage.getItem('locale') || 'en',
         toggleLocale: () => {
           this.setState((prevState) => {
+            const newLanguage =
+              prevState.localeContext.locale === 'id' ? 'en' : 'id';
+            localStorage.setItem('locale', newLanguage);
             return {
               localeContext: {
                 ...prevState.localeContext,
-                locale: prevState.localeContext.locale === 'id' ? 'en' : 'id',
+                locale: newLanguage,
               },
             };
           });
