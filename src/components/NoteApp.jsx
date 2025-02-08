@@ -21,7 +21,7 @@ class NoteApp extends React.Component {
     this.state = {
       authedUser: null,
       initializing: false,
-      theme: 'light',
+      theme: localStorage.getItem('theme') || 'light',
       toggleTheme: () => {
         this.setState((prevState) => {
           const newTheme = prevState.theme === 'light' ? 'dark' : 'light';
@@ -76,6 +76,7 @@ class NoteApp extends React.Component {
 
   componentDidUpdate(prevProps, prevState) {
     if (prevState.theme !== this.state.theme) {
+      localStorage.setItem('theme', this.state.theme);
       document.documentElement.setAttribute('data-theme', this.state.theme);
     }
   }
