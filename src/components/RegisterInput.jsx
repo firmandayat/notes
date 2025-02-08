@@ -29,6 +29,7 @@ function RegisterInput({ register }) {
             onChange={onNameChange}
           />
           <input
+            autoComplete='current-email'
             type="email"
             placeholder={locale === 'en' ? 'Email' : 'Surel'}
             value={email}
