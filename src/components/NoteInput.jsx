@@ -11,6 +11,7 @@ class NoteInput extends React.Component {
       title: '',
       body: '',
       titleMaxLength: 50,
+      isLoading: false,
     };
 
     this.onTitleChangeEventHandler = this.onTitleChangeEventHandler.bind(this);
@@ -36,11 +37,15 @@ class NoteInput extends React.Component {
       return;
     }
 
+    this.setState({ isLoading: true });
+
     try {
       await this.props.addNote({ title, body });
       this.setState({ title: '', body: '' });
     } catch (error) {
       console.error('Failed to add note:', error);
+    } finally {
+      this.setState({ isLoading: false });
     }
   }
 
@@ -51,7 +56,7 @@ class NoteInput extends React.Component {
           {({ locale }) => (
             <>
               <p className="note-input__title__char-limit reveal">
-                {locale === 'en' ? 'Limit Character' : 'Batas Input judul'}{' '}
+                {locale === 'en' ? 'Limit Character' : 'Batas Input judul'}
                 {this.state.titleMaxLength - this.state.title.length}
               </p>
               <input
@@ -61,6 +66,7 @@ class NoteInput extends React.Component {
                 value={this.state.title}
                 onChange={this.onTitleChangeEventHandler}
                 maxLength={this.state.titleMaxLength}
+                disabled={this.state.isLoading}
               />
               <textarea
                 className="reveal"
@@ -68,12 +74,25 @@ class NoteInput extends React.Component {
                 placeholder={locale === 'en' ? 'Content' : 'Catatan'}
                 value={this.state.body}
                 onChange={this.onBodyChangeEventHandler}
+                disabled={this.state.isLoading}
               />
-              <button type="submit" className="note-input reveal">
-                <FaPlusCircle />
-                <span>
-                  {locale === 'en' ? ' Add Note' : ' Tambah Catatan'}
-                </span>
+              <button
+                type="submit"
+                className="note-input reveal"
+                disabled={this.state.isLoading}
+              >
+                {this.state.isLoading ? (
+                  <span>
+                    {locale === 'en' ? 'Adding...' : 'Menambahkan...'}
+                  </span>
+                ) : (
+                  <>
+                    <FaPlusCircle />
+                    <span>
+                      {locale === 'en' ? ' Add Note' : ' Tambah Catatan'}
+                    </span>
+                  </>
+                )}
               </button>
             </>
           )}

@@ -1,10 +1,12 @@
 import PropTypes from 'prop-types';
-import React from 'react';
-import { FaTrash } from 'react-icons/fa';
+import React, { useState } from 'react';
+import { FaTrash, FaSpinner } from 'react-icons/fa';
 import { LocaleConsumer } from '../contexts/LocaleContext';
 
 function DeleteButton({ id, onDelete }) {
-  const handleDelete = (locale) => {
+  const [loading, setLoading] = useState(false);
+
+  const handleDelete = async (locale) => {
     const confirmationMessage =
       locale === 'en'
         ? 'Are you sure you want to delete this note?'
@@ -12,7 +14,9 @@ function DeleteButton({ id, onDelete }) {
 
     const confirmation = window.confirm(confirmationMessage);
     if (confirmation) {
-      onDelete(id);
+      setLoading(true);
+      await onDelete(id);
+      setLoading(false);
     }
   };
 
@@ -22,8 +26,9 @@ function DeleteButton({ id, onDelete }) {
         <button
           className="note-item__delete-button"
           onClick={() => handleDelete(locale)}
+          disabled={loading}
         >
-          <FaTrash />
+          {loading ? <FaSpinner className="loading-icon" /> : <FaTrash />}
           <span>{locale === 'en' ? ' Delete' : ' Hapus'}</span>
         </button>
       )}
@@ -32,8 +37,8 @@ function DeleteButton({ id, onDelete }) {
 }
 
 DeleteButton.propTypes = {
-  id: PropTypes.string,
-  onDelete: PropTypes.func,
+  id: PropTypes.string.isRequired,
+  onDelete: PropTypes.func.isRequired,
 };
 
 export default DeleteButton;

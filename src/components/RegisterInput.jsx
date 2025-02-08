@@ -1,21 +1,24 @@
-import React from 'react';
+import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import useInput from '../hooks/useInput';
 import { LocaleConsumer } from '../contexts/LocaleContext';
+import { FaSpinner } from 'react-icons/fa';
 
 function RegisterInput({ register }) {
   const [name, onNameChange] = useInput('');
   const [email, onEmailChange] = useInput('');
   const [password, onPasswordChange] = useInput('');
+  const [loading, setLoading] = useState(false);
 
-  const onSubmitHandler = (event) => {
+  const onSubmitHandler = async (event) => {
     event.preventDefault();
+    setLoading(true);
 
-    register({
-      name,
-      email,
-      password,
-    });
+    try {
+      await register({ name, email, password });
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
@@ -29,7 +32,7 @@ function RegisterInput({ register }) {
             onChange={onNameChange}
           />
           <input
-            autoComplete='current-email'
+            autoComplete="current-email"
             type="email"
             placeholder={locale === 'en' ? 'Email' : 'Surel'}
             value={email}
@@ -42,8 +45,17 @@ function RegisterInput({ register }) {
             value={password}
             onChange={onPasswordChange}
           />
-          <button className="regis">
-            {locale === 'en' ? 'Register' : 'Daftar'}
+          <button className="regis" disabled={loading}>
+            {loading ? (
+              <>
+                <FaSpinner className="spinner" />{' '}
+                {locale === 'en' ? 'Registering...' : 'Mendaftarkan...'}
+              </>
+            ) : locale === 'en' ? (
+              'Register'
+            ) : (
+              'Daftar'
+            )}
           </button>
         </form>
       )}

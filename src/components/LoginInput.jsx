@@ -1,19 +1,19 @@
-import React from 'react';
+import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import useInput from '../hooks/useInput';
 import { LocaleConsumer } from '../contexts/LocaleContext';
+import { FaSpinner } from 'react-icons/fa';
 
 function LoginInput({ login }) {
   const [email, onEmailChange] = useInput('');
   const [password, onPasswordChange] = useInput('');
+  const [loading, setLoading] = useState(false);
 
-  const onSubmitHandler = (event) => {
+  const onSubmitHandler = async (event) => {
     event.preventDefault();
-
-    login({
-      email,
-      password,
-    });
+    setLoading(true);
+    await login({ email, password });
+    setLoading(false);
   };
 
   return (
@@ -27,7 +27,7 @@ function LoginInput({ login }) {
             placeholder={locale === 'en' ? 'Email' : 'Surel'}
             value={email}
             onChange={onEmailChange}
-            autoComplete='current-email'
+            autoComplete="current-email"
           />
           <input
             id="password"
@@ -36,10 +36,16 @@ function LoginInput({ login }) {
             placeholder={locale === 'en' ? 'Password' : 'Sandi'}
             value={password}
             onChange={onPasswordChange}
-            autoComplete='current-password'
+            autoComplete="current-password"
           />
-          <button className="login">
-            {locale === 'en' ? 'Login' : 'Masuk'}
+          <button className="login" disabled={loading}>
+            {loading ? (
+              <FaSpinner className="spinner" />
+            ) : locale === 'en' ? (
+              'Login'
+            ) : (
+              'Masuk'
+            )}
           </button>
         </form>
       )}
