@@ -119,6 +119,7 @@ class NoteApp extends React.Component {
           <LocaleConsumer>
             {({ locale }) => (
               <input
+                name="search"
                 className="note-app__search"
                 type="text"
                 placeholder={locale === 'en' ? 'Search notes...' : 'Cari Catatan...'}
