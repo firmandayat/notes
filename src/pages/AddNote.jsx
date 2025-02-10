@@ -37,7 +37,7 @@ function AddPage() {
           <h3 className="note-app__title">{ locale === 'en' ? 'Add Note' : 'Tambah Catatan'}</h3>
         )}
         </LocaleConsumer>
-        <NoteInput addNote={onAddNoteHandler} />{' '}
+        <NoteInput addNote={onAddNoteHandler} />
       </div>
       <Footer />
     </div>
