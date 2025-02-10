@@ -52,10 +52,12 @@ class NoteApp extends React.Component {
     this.onLoginSuccess = this.onLoginSuccess.bind(this);
     this.onLogout = this.onLogout.bind(this);
     this.toggleTheme = this.toggleTheme.bind(this);
+    this.toggleLocale = this.toggleLocale.bind(this);
   }
 
   async componentDidMount() {
     document.documentElement.setAttribute('data-theme', this.state.theme);
+    document.documentElement.setAttribute('locale', this.state.locale);
     const { data } = await getUserLogged();
     this.setState({ authedUser: data });
   }
@@ -77,10 +79,19 @@ class NoteApp extends React.Component {
     }));
   }
 
+  toggleLocale() {
+    this.setState((prevState) => ({
+      theme: prevState.theme === 'id' ? 'en' : 'id',
+    }));
+  }
+
   componentDidUpdate(prevProps, prevState) {
     if (prevState.theme !== this.state.theme) {
       localStorage.setItem('theme', this.state.theme);
       document.documentElement.setAttribute('data-theme', this.state.theme);
+    } else if (prevState.locale !== this.state.locale) {
+      localStorage.setItem('locale', this.state.locale);
+      document.documentElement.setAttribute('locale', this.state.locale);
     }
   }
 
