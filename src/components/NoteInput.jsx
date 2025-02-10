@@ -56,7 +56,7 @@ class NoteInput extends React.Component {
           {({ locale }) => (
             <>
               <p className="note-input__title__char-limit reveal">
-                {locale === 'en' ? 'Limit Character' : 'Batas Input judul'}
+                {locale === 'en' ? 'Limit Character ' : 'Batas Input judul '}
                 {this.state.titleMaxLength - this.state.title.length}
               </p>
               <input
