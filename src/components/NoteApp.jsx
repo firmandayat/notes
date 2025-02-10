@@ -81,7 +81,7 @@ class NoteApp extends React.Component {
 
   toggleLocale() {
     this.setState((prevState) => ({
-      theme: prevState.theme === 'id' ? 'en' : 'id',
+      locale: prevState.locale === 'id' ? 'en' : 'id',
     }));
   }
 
