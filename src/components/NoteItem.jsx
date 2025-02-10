@@ -1,7 +1,9 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import NoteItemBody from './NoteItemBody';
 import { showFormattedDate } from '../utils/index';
 import PropTypes from 'prop-types';
+import { FaSpinner } from 'react-icons/fa';
+
 
 function NoteItem({
   title,
@@ -12,6 +14,20 @@ function NoteItem({
   onArchived,
   archived,
 }) {
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setLoading(false);
+    }, 1000);
+
+    return () => clearTimeout(timer);
+  }, []);
+
+  if (loading) {
+    return <h2 className="load"><FaSpinner /> Loading...</h2>;
+  }
+
   return (
     <div className="note-item">
       <NoteItemBody
@@ -34,7 +50,7 @@ NoteItem.propTypes = {
   id: PropTypes.string,
   onDelete: PropTypes.func,
   onArchived: PropTypes.func,
-  archived: PropTypes.bool
+  archived: PropTypes.bool,
 };
 
 export default NoteItem;

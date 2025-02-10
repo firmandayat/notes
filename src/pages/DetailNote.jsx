@@ -32,7 +32,7 @@ function NoteDetail() {
     return (
       <center>
         <h2 className="loading">
-          <FaSpinner /> <span> Loading note...</span>
+          <FaSpinner />  Loading note...
         </h2>
       </center>
     );
